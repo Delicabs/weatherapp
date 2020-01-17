@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 const baseURL = process.env.ENDPOINT;
 
+
 const getWeatherFromApi = async () => {
   try {
     const response = await fetch(`${baseURL}/weather`);
@@ -19,21 +20,27 @@ class Weather extends React.Component {
     super(props);
 
     this.state = {
-      icon: "",
+      icon: '',
+      description: '',
+      wdescrip: '',
     };
   }
 
   async componentWillMount() {
     const weather = await getWeatherFromApi();
-    this.setState({icon: weather.icon.slice(0, -1)});
+    this.setState({ icon: weather.icon.slice(0, -1) });
+    this.setState({ description: weather.main });
+    this.setState({ wdescrip: weather.description });
   }
 
   render() {
     const { icon } = this.state;
-
+    const { description } = this.state;
+    const { wdescrip } = this.state;
     return (
       <div className="icon">
-        { icon && <img src={`/img/${icon}.svg`} /> }
+        {icon && <img src={`/img/${icon}.svg`} alt="Weather description" />}
+        <text> today we have {description} to be more spesific {wdescrip}</text>
       </div>
     );
   }
