@@ -5,7 +5,7 @@
 
 I modified tha backend API fetch to fetch a little more data.
 The data is then fetched in the frontend and the used to show new & more data. We use the the image, description, current temperature and what the weather actually feels like. Cleaned the the baseproject with ES lint. 
-Attatch your API=KEY to the .env file wich can be found on the project root. 
+Attatch your API=KEY to the .env file which can be found on the project root. 
 
 
 #### Getting started with your minikube
