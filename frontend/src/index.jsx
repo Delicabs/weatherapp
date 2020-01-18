@@ -23,24 +23,29 @@ class Weather extends React.Component {
       icon: '',
       description: '',
       wdescrip: '',
+      currentTemp: '',
+      feelsLike: '',
     };
   }
 
   async componentWillMount() {
     const weather = await getWeatherFromApi();
-    this.setState({ icon: weather.icon.slice(0, -1) });
-    this.setState({ description: weather.main });
-    this.setState({ wdescrip: weather.description });
+    console.log(weather);
+    this.setState({ icon: weather.weather[0].icon.slice(0, -1) });
+    this.setState({ description: weather.weather[0].main });
+    this.setState({ wdescrip: weather.weather[0].description });
+    this.setState({ currentTemp: weather.main.temp });
+    this.setState({ feelsLike: weather.main.feels_like });
   }
 
   render() {
-    const { icon } = this.state;
-    const { description } = this.state;
-    const { wdescrip } = this.state;
+    const { icon, description, wdescrip, feelsLike, currentTemp } = this.state;
     return (
       <div className="icon">
         {icon && <img src={`/img/${icon}.svg`} alt="Weather description" />}
-        <text> today we have {description} to be more spesific {wdescrip}</text>
+        <text> today we have {description}!! But to be more spesific {wdescrip}!!</text>
+        <text> Currently its {currentTemp} celcius.
+          You should dress accordingly as it feels like {feelsLike} celscius. </text>
       </div>
     );
   }

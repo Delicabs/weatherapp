@@ -14,7 +14,7 @@ const app = new Koa();
 app.use(cors());
 
 const fetchWeather = async () => {
-  const endpoint = `${mapURI}/weather?q=${targetCity}&appid=${appId}&`;
+  const endpoint = `${mapURI}/weather?q=${targetCity}&units=metric&appid=${appId}&`;
   const response = await fetch(endpoint);
 
   return response ? response.json() : {};
@@ -23,7 +23,10 @@ const fetchWeather = async () => {
 router.get('/api/weather', async ctx => {
   const weatherData = await fetchWeather();
   ctx.type = 'application/json; charset=utf-8';
-  ctx.body = weatherData.weather ? weatherData.weather[0] : {};
+  ctx.body = weatherData;
+  console.log(weatherData);
+  // console.log(weatherData.wind);
+  console.log(ctx.body);
 });
 
 app.use(router.routes());
